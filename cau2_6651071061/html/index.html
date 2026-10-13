@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Sweet Dream Bakery - Tiệm bánh ngọt handmade với nguyên liệu tươi ngon nhất"
+    />
+    <meta
+      name="keywords"
+      content="bánh ngọt, bakery, tiệm bánh, bánh kem, bánh mì"
+    />
+    <meta name="author" content="SinhVien" />
+    <title>Sweet Dream Bakery - Tiệm Bánh Ngọt Handmade</title>
+
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- CSS bổ sung cho phần Tailwind chưa hỗ trợ sẵn -->
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body class="font-sans text-stone-800 bg-amber-50">
+    <!-- ===== HEADER - NAVIGATION ===== -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <nav
+        class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4"
+      >
+        <!-- Logo bên trái -->
+        <a href="#" class="text-2xl font-bold text-amber-700">
+          Sweet Dream Bakery
+        </a>
+
+        <!-- Menu ngang - ẩn trên di động (hidden md:flex) -->
+        <ul class="hidden md:flex space-x-8 text-stone-700 font-medium">
+          <li>
+            <a href="#hero" class="hover:text-amber-600 transition"
+              >Trang chủ</a
+            >
+          </li>
+          <li>
+            <a href="#menu" class="hover:text-amber-600 transition">Menu</a>
+          </li>
+          <li>
+            <a href="#story" class="hover:text-amber-600 transition"
+              >Câu chuyện</a
+            >
+          </li>
+          <li>
+            <a href="#order" class="hover:text-amber-600 transition"
+              >Đặt bánh</a
+            >
+          </li>
+          <li>
+            <a href="#contact" class="hover:text-amber-600 transition"
+              >Liên hệ</a
+            >
+          </li>
+        </ul>
+
+        <!-- Icon hamburger - chỉ hiện trên di động (md:hidden) -->
+        <button
+          id="hamburger-btn"
+          class="md:hidden text-stone-700 focus:outline-none"
+          aria-label="Toggle menu"
+        >
+          <svg
+            class="w-7 h-7"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </nav>
+
+      <!-- Mobile menu - mặc định ẩn, toggle bằng JS -->
+      <ul
+        id="mobile-menu"
+        class="hidden md:hidden bg-white border-t border-stone-200 px-6 pb-4 space-y-3 text-stone-700 font-medium"
+      >
+        <li>
+          <a href="#hero" class="block py-2 hover:text-amber-600 transition"
+            >Trang chủ</a
+          >
+        </li>
+        <li>
+          <a href="#menu" class="block py-2 hover:text-amber-600 transition"
+            >Menu</a
+          >
+        </li>
+        <li>
+          <a href="#story" class="block py-2 hover:text-amber-600 transition"
+            >Câu chuyện</a
+          >
+        </li>
+        <li>
+          <a href="#order" class="block py-2 hover:text-amber-600 transition"
+            >Đặt bánh</a
+          >
+        </li>
+        <li>
+          <a href="#contact" class="block py-2 hover:text-amber-600 transition"
+            >Liên hệ</a
+          >
+        </li>
+      </ul>
+    </header>
+
+    <!-- ===== SECTION HERO ===== -->
+    <section
+      id="hero"
+      class="max-w-7xl mx-auto px-6 py-16 md:py-24 flex flex-col md:flex-row items-center gap-10"
+    >
+      <!-- Bên trái: tiêu đề + mô tả + CTA -->
+      <div class="flex-1 text-center md:text-left">
+        <h1
+          class="text-4xl md:text-6xl font-bold text-stone-900 leading-tight mb-6"
+        >
+          Hương vị ngọt ngào <br class="hidden md:block" />cho mỗi khoảnh khắc
+        </h1>
+        <p class="text-lg text-stone-600 mb-8 max-w-lg">
+          Chúng tôi mang đến những chiếc bánh handmade từ nguyên liệu tươi ngon
+          nhất, được tạo ra với tình yêu và đam mê. Mỗi chiếc bánh là một tác
+          phẩm nghệ thuật.
+        </p>
+        <a
+          href="#menu"
+          class="inline-block bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-full font-semibold transition shadow-lg hover:shadow-xl"
+        >
+          Khám phá Menu →
+        </a>
+      </div>
+      <!-- Bên phải: ảnh bánh ngọt -->
+      <div class="flex-1">
+        <img
+          src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=400&fit=crop"
+          alt="Bánh ngọt đẹp mắt"
+          class="rounded-3xl shadow-2xl w-full object-cover max-h-96"
+        />
+      </div>
+    </section>
+
+    <!-- ===== SECTION MENU BÁNH ===== -->
+    <!--
+        GHI CHÚ SO SÁNH: Ở bài này, mỗi card bánh được tạo hoàn toàn bằng việc tự phối
+        các utility class của Tailwind (rounded-2xl, shadow-lg, overflow-hidden, bg-white,
+        hover:shadow-xl, transition...) thay vì dùng một class component dựng sẵn như
+        Bootstrap (.card, .card-body, .card-title...). Đây chính là triết lý "utility-first"
+        — lập trình viên tự quyết định giao diện từ các class nhỏ, tạo nên thiết kế độc đáo,
+        khác với "component-based" của Bootstrap nơi giao diện bị gò bó theo component có sẵn.
+    -->
+    <section id="menu" class="bg-white py-16">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-center text-stone-900 mb-4"
+        >
+          Menu Bánh Ngọt
+        </h2>
+        <p class="text-center text-stone-500 mb-12 max-w-2xl mx-auto">
+          Tuyển chọn những loại bánh được yêu thích nhất tại Sweet Dream Bakery
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <article
+            class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=250&fit=crop"
+              alt="Bánh Chocolate Lava"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-5">
+              <h3 class="text-xl font-semibold text-stone-800 mb-2">
+                Bánh Chocolate Lava
+              </h3>
+              <p class="text-stone-500 text-sm mb-3">
+                Lớp vỏ giòn bên ngoài, nhân chocolate chảy mềm mịn bên trong.
+                Hương vị đậm đà khó cưỡng.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-amber-600 font-bold text-lg">150.000đ</span>
+                <button
+                  class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-amber-200 transition"
+                >
+                  Đặt ngay
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article
+            class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=400&h=250&fit=crop"
+              alt="Tiramisu Ý"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-5">
+              <h3 class="text-xl font-semibold text-stone-800 mb-2">
+                Tiramisu Ý
+              </h3>
+              <p class="text-stone-500 text-sm mb-3">
+                Công thức truyền thống từ nước Ý, lớp kem mascarpone mịn màng
+                hòa quyện cùng cà phê espresso.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-amber-600 font-bold text-lg">180.000đ</span>
+                <button
+                  class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-amber-200 transition"
+                >
+                  Đặt ngay
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article
+            class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&h=250&fit=crop"
+              alt="Cheesecake Việt Quất"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-5">
+              <h3 class="text-xl font-semibold text-stone-800 mb-2">
+                Cheesecake Việt Quất
+              </h3>
+              <p class="text-stone-500 text-sm mb-3">
+                Lớp cheese béo ngậy kết hợp với sốt việt quất tươi chua nhẹ, cân
+                bằng vị giác hoàn hảo.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-amber-600 font-bold text-lg">200.000đ</span>
+                <button
+                  class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-amber-200 transition"
+                >
+                  Đặt ngay
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article
+            class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?w=400&h=250&fit=crop"
+              alt="Croissant Bơ Pháp"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-5">
+              <h3 class="text-xl font-semibold text-stone-800 mb-2">
+                Croissant Bơ Pháp
+              </h3>
+              <p class="text-stone-500 text-sm mb-3">
+                Lớp bột ngàn lớp giòn xốp, thơm lừng bơ Pháp. Hoàn hảo cho bữa
+                sáng nhẹ nhàng.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-amber-600 font-bold text-lg">65.000đ</span>
+                <button
+                  class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-amber-200 transition"
+                >
+                  Đặt ngay
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article
+            class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=400&h=250&fit=crop"
+              alt="Macaron Hỗn Hợp"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-5">
+              <h3 class="text-xl font-semibold text-stone-800 mb-2">
+                Macaron Hỗn Hợp
+              </h3>
+              <p class="text-stone-500 text-sm mb-3">
+                Hộp 12 chiếc macaron với đa dạng hương vị: vanilla, dâu tây,
+                matcha, chanh dây, chocolate.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-amber-600 font-bold text-lg">250.000đ</span>
+                <button
+                  class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-amber-200 transition"
+                >
+                  Đặt ngay
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article
+            class="rounded-2xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=400&h=250&fit=crop"
+              alt="Bánh Kem Sinh Nhật"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-5">
+              <h3 class="text-xl font-semibold text-stone-800 mb-2">
+                Bánh Kem Sinh Nhật
+              </h3>
+              <p class="text-stone-500 text-sm mb-3">
+                Bánh kem tùy chỉnh theo yêu cầu, trang trí tinh xảo. Làm nổi bật
+                mọi bữa tiệc sinh nhật.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-amber-600 font-bold text-lg">350.000đ</span>
+                <button
+                  class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-amber-200 transition"
+                >
+                  Đặt ngay
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION CÂU CHUYỆN THƯƠNG HIỆU ===== -->
+    <section id="story" class="py-16 bg-amber-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-center text-stone-900 mb-12"
+        >
+          Câu Chuyện Thương Hiệu
+        </h2>
+
+        <div class="flex flex-col md:flex-row items-center gap-10">
+          <!-- Ảnh minh họa -->
+          <div class="flex-1">
+            <img
+              src="https://images.unsplash.com/photo-1556217477-d325251ece38?w=500&h=400&fit=crop"
+              alt="Người thợ làm bánh"
+              class="rounded-2xl shadow-lg w-full object-cover"
+            />
+          </div>
+
+          <!-- Nội dung flow content với phrasing content -->
+          <div class="flex-1 space-y-5 text-stone-700 leading-relaxed">
+            <p>
+              <strong class="text-amber-700 font-semibold"
+                >Sweet Dream Bakery</strong
+              >
+              được thành lập vào năm 2018 bởi đầu bếp bánh
+              <em class="text-amber-700 font-semibold">Nguyễn Minh Anh</em> —
+              người đã dành hơn 10 năm học hỏi nghệ thuật làm bánh tại Pháp và
+              Nhật Bản.
+            </p>
+            <p>
+              Với triết lý
+              <strong class="text-amber-700 font-semibold"
+                >"Mỗi chiếc bánh là một câu chuyện"</strong
+              >, chúng tôi luôn lựa chọn
+              <em class="text-amber-700 font-semibold"
+                >nguyên liệu tươi ngon nhất</em
+              >, từ bơ Pháp Président, chocolate Valrhona cho đến trứng gà thả
+              vườn từ nông trại hữu cơ.
+            </p>
+            <p>
+              Không chỉ đơn thuần là một tiệm bánh, Sweet Dream Bakery còn là
+              nơi kết nối yêu thương. Chúng tôi tin rằng
+              <strong class="text-amber-700 font-semibold"
+                >hương vị ngọt ngào</strong
+              >
+              có sức mạnh xoa dịu tâm hồn và mang mọi người xích lại gần nhau
+              hơn.
+            </p>
+            <p>
+              Từ những buổi sinh nhật, kỷ niệm ngày cưới, cho đến những chiều
+              cuối tuần thư giãn bên gia đình —
+              <em class="text-amber-700 font-semibold"
+                >Sweet Dream luôn đồng hành cùng bạn trong mỗi khoảnh khắc đáng
+                nhớ</em
+              >.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ASIDE + FORM ĐẶT BÁNH ===== -->
+    <section id="order" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-center text-stone-900 mb-12"
+        >
+          Đặt Bánh Theo Yêu Cầu
+        </h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Nội dung chính chiếm lg:col-span-2 -->
+          <div class="lg:col-span-2">
+            <!-- FORM đặt bánh -->
+            <form class="space-y-6 bg-stone-50 p-8 rounded-2xl shadow-md">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-stone-700 mb-2"
+                    >Họ và tên</label
+                  >
+                  <input
+                    type="text"
+                    placeholder="Nhập họ tên của bạn"
+                    class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-stone-700 mb-2"
+                    >Số điện thoại</label
+                  >
+                  <input
+                    type="tel"
+                    placeholder="0xxx xxx xxx"
+                    class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
+                  />
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-stone-700 mb-2"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  placeholder="email@example.com"
+                  class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-stone-700 mb-2"
+                  >Loại bánh muốn đặt</label
+                >
+                <select
+                  class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition text-stone-600"
+                >
+                  <option value="">-- Chọn loại bánh --</option>
+                  <option value="chocolate-lava">Bánh Chocolate Lava</option>
+                  <option value="tiramisu">Tiramisu Ý</option>
+                  <option value="cheesecake">Cheesecake Việt Quất</option>
+                  <option value="croissant">Croissant Bơ Pháp</option>
+                  <option value="macaron">Macaron Hỗn Hợp</option>
+                  <option value="birthday-cake">Bánh Kem Sinh Nhật</option>
+                  <option value="custom">Bánh tùy chỉnh khác</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-stone-700 mb-2"
+                  >Yêu cầu chi tiết</label
+                >
+                <textarea
+                  rows="4"
+                  placeholder="Mô tả chi tiết yêu cầu: kích thước, hương vị, trang trí, ngày nhận bánh..."
+                  class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition resize-none"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-xl font-semibold transition shadow-md hover:shadow-lg"
+              >
+                Gửi Yêu Cầu Đặt Bánh
+              </button>
+            </form>
+          </div>
+
+          <!-- ASIDE chiếm lg:col-span-1 -->
+          <aside
+            class="lg:col-span-1 bg-amber-50 border border-amber-200 rounded-xl p-6 h-fit"
+          >
+            <h3 class="text-xl font-bold text-amber-800 mb-4">
+              Lưu ý khi đặt bánh
+            </h3>
+            <ul class="space-y-3 text-stone-600 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="text-amber-500 mt-1">✦</span>
+                <span
+                  >Đặt trước tối thiểu <strong>24 giờ</strong> cho bánh thường,
+                  <strong>48 giờ</strong> cho bánh tùy chỉnh.</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-500 mt-1">✦</span>
+                <span
+                  >Giao hàng miễn phí trong bán kính <strong>5km</strong> từ cửa
+                  hàng.</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-500 mt-1">✦</span>
+                <span
+                  >Thanh toán linh hoạt: tiền mặt, chuyển khoản, ví điện
+                  tử.</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-500 mt-1">✦</span>
+                <span
+                  >Hoàn tiền <strong>100%</strong> nếu bánh không đúng yêu
+                  cầu.</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-500 mt-1">✦</span>
+                <span
+                  >Giảm <strong>10%</strong> cho đơn hàng từ 500.000đ trở
+                  lên.</span
+                >
+              </li>
+            </ul>
+
+            <div class="mt-6 p-4 bg-amber-100 rounded-lg">
+              <p class="text-amber-800 font-semibold text-sm">
+                Hotline đặt bánh nhanh:
+              </p>
+              <p class="text-amber-900 font-bold text-lg mt-1">0909 123 456</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer id="contact" class="bg-stone-900 text-stone-200 py-12">
+      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <!-- Cột 1: Thông tin liên hệ -->
+        <div>
+          <h4 class="text-lg font-bold text-white mb-4">Sweet Dream Bakery</h4>
+          <ul class="space-y-2 text-sm text-stone-400">
+            <li>123 Nguyễn Huệ, Quận 1, TP.HCM</li>
+            <li>0909 123 456</li>
+            <li>hello@sweetdream.vn</li>
+          </ul>
+        </div>
+
+        <!-- Cột 2: Giờ mở cửa -->
+        <div>
+          <h4 class="text-lg font-bold text-white mb-4">Giờ mở cửa</h4>
+          <ul class="space-y-2 text-sm text-stone-400">
+            <li>Thứ 2 - Thứ 6: 7:00 - 21:00</li>
+            <li>Thứ 7: 8:00 - 22:00</li>
+            <li>Chủ nhật: 8:00 - 20:00</li>
+          </ul>
+        </div>
+
+        <!-- Cột 3: Mạng xã hội -->
+        <div>
+          <h4 class="text-lg font-bold text-white mb-4">Theo dõi chúng tôi</h4>
+          <ul class="space-y-2 text-sm text-stone-400">
+            <li>
+              <a href="#" class="hover:text-amber-400 transition"> Facebook</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-amber-400 transition"> Instagram</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-amber-400 transition"> TikTok</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-amber-400 transition"> YouTube</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Cột 4: Bản quyền -->
+        <div>
+          <h4 class="text-lg font-bold text-white mb-4">Chính sách</h4>
+          <ul class="space-y-2 text-sm text-stone-400">
+            <li>
+              <a href="#" class="hover:text-amber-400 transition"
+                >Chính sách bảo mật</a
+              >
+            </li>
+            <li>
+              <a href="#" class="hover:text-amber-400 transition"
+                >Điều khoản sử dụng</a
+              >
+            </li>
+            <li>
+              <a href="#" class="hover:text-amber-400 transition"
+                >Chính sách đổi trả</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bản quyền -->
+      <div
+        class="max-w-7xl mx-auto px-6 mt-8 pt-8 border-t border-stone-700 text-center text-sm text-stone-500"
+      >
+        <p>
+          &copy; 2026 Sweet Dream Bakery. All rights reserved. | Bài tập
+          Tailwind CSS
+        </p>
+      </div>
+    </footer>
+
+    <!-- JavaScript cho toggle menu mobile -->
+    <script src="../js/script.js"></script>
+  </body>
+</html>
